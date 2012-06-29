@@ -1,7 +1,4 @@
-sock = new WebSocket("ws://localhost:8888")
+socket = io.connect("http://localhost:8889")
 
-sock.onopen = ->
-  alert("Socket has been opened!");
-
-sock.onmessage = (msg) ->
-  alert(msg)
+socket.on "greeting", (data) ->
+  console.log(data)
