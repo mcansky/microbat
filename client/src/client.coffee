@@ -1,4 +1,5 @@
-socket = io.connect("http://localhost:8889")
+#socket = io.connect("http://localhost:8889")
+socket = io.connect("http://dev-netadmin-shared.accountservergroup.com:8889")
 
 socket.on "greeting", (data) ->
   console.log(data)
