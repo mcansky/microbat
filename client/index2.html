@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+  <title>microbat</title>
+
+  <script type="text/javascript">
+    var xhr = new XMLHttpRequest();
+    var now = (new Date).getTime();
+
+    xhr.open(
+      "GET",
+      "http://dev-netadmin-shared.accountservergroup.com/ping.php",
+      true
+    )
+
+
+    xhr.onreadystatechange = function() {
+      if(xhr.readyState == 4) {
+        console.log(4, (new Date).getTime() - now)
+      }
+    }
+
+    xhr.send();
+  </script>
+</head>
+
+<body>
+  hi
+</body>
+</html>
