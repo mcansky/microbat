@@ -1,15 +1,13 @@
 (function() {
-  var io, socket;
-  io = require("socket.io");
-  socket = io.listen(8889);
-  socket.on("connection", function(socket) {
-    socket.emit("greeting", {
-      msg: "hi"
+  var handler, http, server;
+  http = require("http");
+  handler = function(req, res) {
+    res.writeHead(200, {
+      "Content-Type": "text/plain",
+      "Access-Control-Allow-Origin": "*"
     });
-    return socket.on("ping", function(data) {
-      return socket.emit("pong", {
-        original_timestamp: data.timestamp
-      });
-    });
-  });
+    return res.end();
+  };
+  server = http.createServer(handler);
+  server.listen(8899);
 }).call(this);

@@ -1,12 +1,11 @@
-io   = require("socket.io")
+http = require("http")
 
-socket = io.listen(8889)
+handler = (req, res) ->
+  res.writeHead 200,
+    "Content-Type": "text/plain"
+    "Access-Control-Allow-Origin": "*"
 
-socket.on "connection", (socket) ->
-  socket.emit "greeting",
-    msg: "hi"
+  res.end()
 
-  socket.on "ping", (data) ->
-    socket.emit "pong",
-      original_timestamp: data.timestamp
-
+server = http.createServer(handler)
+server.listen(8899)
