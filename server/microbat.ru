@@ -1,6 +1,13 @@
 require "rubygems"
 require "rack"
 
-run proc {|env|
-  [200, { "Content-Type" => "text/plain" }, ["PONG"]]
-}
+run proc do |env|
+  [
+    200,
+    {
+      "Content-Type"                => "text/plain",
+      "Access-Control-Allow-Origin" => "*"
+    },
+    ["^v^"]
+  ]
+end
