@@ -1,16 +1,51 @@
-#socket = io.connect("http://localhost:8889")
-socket = io.connect("http://dev-netadmin-shared.accountservergroup.com:8889")
+class Microbat
+  constructor: (@servers, opts) ->
+    @opts = _.extend({
+      port: 8989
+    }, opts || {})
 
-socket.on "greeting", (data) ->
-  console.log(data)
+    @xhr   = new XMLHttpRequest
+    @pings = {}
 
-socket.on "pong", (data) ->
-  new_now = (new Date).getTime()
+    format_servers
 
-  #console.log(data)
-  console.log("Round trip: #{new_now - data.original_timestamp} ms")
+  format_servers: ->
+    format_server = (server_obj) ->
+      if typeof(server_obj) is "string"
+        obj = { hostname: server_obj }
 
-now = (new Date).getTime()
-socket.emit "ping",
-  timestamp: now
+      _.extend({ port: @opts.port }, obj)
+
+    format_server(server) for server in @servers
+
+  ping: (hostname, opts) ->
+    opts = _.extend({
+      pings: 5
+    }, opts || {})
+
+    perform_ping = =>
+      now = (new Date).getTime()
+
+      @xhr.open("GET", "http://#{hostname}:#{port}", true)
+      @xhr.onreadystatechange =>
+        if @xhr.readyState is 4
+          unless @pings[hostname]?
+            @pings[hostname] =
+              times:     []
+              complete:  false
+              num_pings: opts.pings
+
+          @pings[hostname].times.push((new Date).getTime() - now)
+
+    perform_ping
+
+    while @pings[hostname].times.length isnt @pings[hostname].num_pings
+      setTimeout((->), 50)
+
+    @pings[hostname].complete = true
+
+    this.median(@pints[hostname].times)
+
+  median: (arr) ->
+      arr[Math.floor(arr.length / 2)]
 
