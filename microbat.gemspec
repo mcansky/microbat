@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency "rack", "~> 1.4.1"
   s.add_runtime_dependency "puma", "~> 1.4.0"
-
+  s.add_runtime_dependency "trollop", "~> 1.16.2"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
