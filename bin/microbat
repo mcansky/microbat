@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+server = Microbat::Server.new
+
+Rack::Handler::Puma.run(server, :port => Microbat::PORT)
