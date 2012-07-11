@@ -9,12 +9,12 @@ module Microbat
       }.merge(options)
 
       Rack::Handler::Puma.run(
-        server,
+        response,
         :Port => options[:port]
       )
     end
 
-    def self.server
+    def self.response
       proc {|env| [
         200,
         { "Content-Type" => "text/plain",
