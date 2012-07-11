@@ -11,9 +11,8 @@ opts = Trollop::options do
 end
 
 if opts[:client]
-  puts File.expand_path("coffee/microbat.coffee")
   puts CoffeeScript.compile(
-    File.read("coffee/microbat.coffee")
+    File.read("#{Microbat.root}/lib/coffee/microbat.coffee")
   )
 else
   Microbat::Server.run
