@@ -1,5 +1,20 @@
 #!/usr/bin/env ruby
 
-server = Microbat::Server.new
+require "rubygems"
+require "trollop"
+require "coffee_script"
+require "microbat"
 
-Rack::Handler::Puma.run(server, :port => Microbat::PORT)
+opts = Trollop::options do
+  opt :client, "Print javascript client"
+  opt :port, "Port to listen on", :default => Microbat::PORT
+end
+
+if opts[:client]
+  puts File.expand_path("coffee/microbat.coffee")
+  puts CoffeeScript.compile(
+    File.read("coffee/microbat.coffee")
+  )
+else
+  Microbat::Server.run
+end
