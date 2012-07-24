@@ -1,4 +1,4 @@
-class Microbat
+class MicrobatClient
   constructor: (@servers, opts) ->
     @opts = _.extend({
       port: 8989

@@ -12,7 +12,7 @@ end
 
 if opts[:client]
   puts CoffeeScript.compile(
-    File.read("#{Microbat.root}/lib/coffee/microbat.coffee")
+    File.read("#{Microbat.root}/lib/microbat/client.coffee")
   )
 else
   Microbat::Server.run
