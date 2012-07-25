@@ -4,18 +4,23 @@ Microbat uses HTTP "pings" to determine response time for remote servers
 
 ## Installation
 
+```
 gem install microbat 
+```
 
 ## Server
 
 Fire up the server
 
-$ microbat
+```
+microbat
+```
 
 ## Client
 
 Output the client Javascript code to include in your HTML
 
-$ microbat --client > microbat.js
-
+```
+microbat --client > microbat.js
+```
 
