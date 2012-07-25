@@ -11,7 +11,8 @@
 #   - dist/**/*.js
 #
 src_files:
-    - lib/microbat/*.coffee
+    - vendor/underscore-min.js
+    - lib/**/*.js
 
 # stylesheets
 #
@@ -49,7 +50,7 @@ helpers:
 #   - **/*[sS]pec.js
 #
 spec_files:
-    - "**/*_spec.coffee"
+    - "*_spec.js"
 
 # src_dir
 #
@@ -71,4 +72,4 @@ src_dir:
 #
 # spec_dir: spec/javascripts
 #
-spec_dir:
+spec_dir: spec

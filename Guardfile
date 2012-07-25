@@ -1,13 +1,12 @@
-# Run JS and CoffeeScript files in a typical Rails 3.1 fashion, placing Underscore templates in app/views/*.jst
-# Your spec files end with _spec.{js,coffee}.
+guard :coffeescript, all_on_start: true, input: "lib/microbat"
+guard :coffeescript, all_on_start: true, input: "spec"
 
-spec_location = "spec/%s_spec.coffee"
-
-# uncomment if you use NerdCapsSpec.js
-# spec_location = "spec/javascripts/%sSpec"
-
-guard "jasmine-headless-webkit" do
-  watch %r{^lib/microbat/.*?\.coffee$}
-  watch %r{^spec/.*?_spec\.coffee$}
+jasmine_options = {
+  server:      :jasmine_gem,
+  spec_dir:    "spec",
+  jasmine_url: "http://localhost:8888/"
+}
+guard :jasmine, jasmine_options do
+  watch(%r{^lib/microbat/(.+?)\.coffee$}) {|m| "spec/#{m[1]}_spec.coffee" }
+  watch(%r{^spec/.+_spec\.coffee$})
 end
-

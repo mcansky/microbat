@@ -7,7 +7,7 @@ describe "MicrobatClient", ->
       expect(true).toBe(true)
 
     it "fails", ->
-      expect(false).toBe(false)
+      expect(false).toBe(true)
 
       #it "assigns an XMLHttpRequest to @xhr", ->
       #  xhr = new XMLHttpRequest
