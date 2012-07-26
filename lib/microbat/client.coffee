@@ -1,5 +1,5 @@
-class MicrobatClient
-  constructor: (@servers, opts) ->
+class @MicrobatClient
+  constructor: (@servers = [], opts) ->
     @opts = _.extend({
       port: 8989
     }, opts || {})
@@ -7,14 +7,14 @@ class MicrobatClient
     @xhr   = new XMLHttpRequest
     @pings = {}
 
-    format_servers
+    @format_servers()
 
   format_servers: ->
-    format_server = (server_obj) ->
+    format_server = (server_obj) =>
       if typeof(server_obj) is "string"
-        obj = { hostname: server_obj }
+        server_obj = hostname: server_obj
 
-      _.extend({ port: @opts.port }, obj)
+      _.extend(port: @opts.port, server_obj)
 
     format_server(server) for server in @servers
 
