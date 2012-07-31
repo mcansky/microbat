@@ -2,6 +2,8 @@
 
 Microbat uses HTTP "pings" to determine response time for remote servers
 
+### Work in progress 
+
 ## Installation
 
 ```
