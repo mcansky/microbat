@@ -1,8 +1,8 @@
 describe "MicrobatClient", ->
-  describe "#constructor", ->
-    beforeEach ->
-      @mbc = new MicrobatClient
+  beforeEach ->
+    @mbc = new MicrobatClient
 
+  describe "#constructor", ->
     it "assigns an XMLHttpRequest to @xhr", ->
       xhr = new XMLHttpRequest
       expect(@mbc.xhr).toEqual(xhr)
@@ -28,3 +28,22 @@ describe "MicrobatClient", ->
           port:     8989
 
       e(host) for host in servers
+
+  describe "#ping", ->
+    it 'sends an HTTP request ("ping")', ->
+      #@mbc.ping("localhost")
+      runs -> 
+        @mbc.ping("localhost")
+
+      waitsFor ->
+        @mbc.pings.localhost.times.length == 2
+      ,
+      "all pings to be executed",
+      5000
+
+      runs ->
+        expect(@mbc.pings.localhost).toEqual
+          times:     jasmine.any(Number) for [0..5],
+          complete:  true,
+          median:    null
+      
